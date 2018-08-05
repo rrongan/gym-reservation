@@ -1,0 +1,22 @@
+{% for f in facility %}
+    <tr>
+        <td>{{ f.id }}</td>
+        <td>{{ f.name }}</td>
+        <td>
+            <button type="button"
+                    class="btn btn-warning btn-sm js-update-facility"
+                    data-url="{% url 'facility_update' f.id %}">
+                <span class="fas fa-edit"></span> Edit
+            </button>
+            <button type="button"
+                    class="btn btn-danger btn-sm js-delete-facility"
+                    data-url="{% url 'facility_delete' f.id %}">
+                <span class="fas fa-trash"></span> Delete
+            </button>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="3" class="text-center bg-warning">No Facility</td>
+    </tr>
+{% endfor %}

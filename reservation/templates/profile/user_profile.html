@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+    <script src="{% static 'reservation/js/user_profile.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">User Profile
+        <button type="button"
+                class="btn btn-danger btn-lg js-delete-user-profile ml-2 float-right"
+                data-url="{% url 'user_profile_delete' user.id %}">
+            <span class="fas fa-trash"></span> Delete Profile
+        </button>
+        <button type="button"
+                class="btn btn-warning btn-lg js-update-user-profile ml-2 float-right"
+                data-url="{% url 'user_profile_update' user.id %}">
+            <span class="fas fa-edit"></span> Edit Profile
+        </button>
+        <a type="button"
+           class="btn btn-info btn-lg float-right"
+           href="{% url 'change_password' %}">
+            <span class="fas fa-edit"></span> Edit Password
+        </a>
+    </h1>
+    <table class="table" id="user-profile-table">
+        {% include 'profile/includes/partial_user_profile_list.html' %}
+    </table>
+    <div class="modal fade" id="modal-user-profile">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <h2>Login</h2>
+    <form method="post" class="form-text">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-secondary" type="submit">Login</button>
+    </form>
+    <br>
+    <p><strong>-- OR --</strong></p>
+    <br>
+    <a href="{% url 'social:begin' 'google-oauth2' %}"><img style="height:4em" id="signInButton"
+                                                            src="http://www.setyourowntests.com/_/rsrc/1468869481521/help/accounts/btn_google_signin_dark_normal_web%402x.png"></a>
+{% endblock %}

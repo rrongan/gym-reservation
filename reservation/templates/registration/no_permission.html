@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="page-header">Permission Denied</h1>
+    <p class="lead">You have no permission to access this page</p>
+    <a href="{% url 'home' %}">Back To Home Page</a>
+{% endblock %}

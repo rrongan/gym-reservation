@@ -1,0 +1,55 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img style="margin-right: 5px" src="{% static 'css/images/logo.png' %}" width="20" height="56" class="d-inline-block align-top" alt="">
+    <a class="navbar-brand mb-0 h1" href="{% url 'home' %}">
+        Waterford <br> <span style="margin-left: 4em">Fitness</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+                {% if user.user_type == 'Admin' %}
+                    <li class="nav-item {% if request.path == '/user/' %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'user_list' %}">User</a>
+                    </li>
+                    <li class="nav-item {% if request.path == '/reservation/' %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'reservation_list' %}">Reservation</a>
+                    </li>
+                    <li class="nav-item {% if request.path == '/facility/' %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'facility_list' %}">Facility</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item {% if request.path == '/user_reservation/' %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'user_reservation_list' user.id %}">Reservation</a>
+                    </li>
+                    <li class="nav-item {% if request.path == '/user_history/' %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'user_history_list' user.id %}">History</a>
+                    </li>
+                    <li class="nav-item {% if request.path == '/user_facility/' %} active {% endif %}">
+                        <a class="nav-link" href="{% url 'user_facility_list'%}">Facility</a>
+                    </li>
+                {% endif %}
+            {% endif %}
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'user_profile' user.id %}">Welcome, {{ user.first_name }}</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="btn btn-danger my-2 my-sm-0 ml-3" type="submit">Log Out</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="btn btn-primary my-2 my-sm-0" type="submit">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'signup' %}" class="btn btn-success my-2 my-sm-0 ml-3" type="submit">Sign Up</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+    <script src="{% static 'reservation/js/user_reservation.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Reservation</h1>
+    <p>
+        <button type="button" class="btn btn-primary js-create-user-reservation" data-url="{% url 'user_reservation_create' user.id%}">
+            <span class="fas fa-plus"></span>
+            New Reservation
+        </button>
+    </p>
+    <table class="table display" id="user-reservation-table">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Facility</th>
+            <th>Duration (Hours)</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            {% include 'user_reservation/includes/partial_user_reservation_list.html' %}
+        </tbody>
+    </table>
+    <div class="modal fade" id="modal-user-reservation">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+{% endblock %}

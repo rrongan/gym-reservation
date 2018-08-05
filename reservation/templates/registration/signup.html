@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+        <h2>Sign up</h2>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    <p>
+                        {{ field.label_tag }}<br>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="color: white">{{ field.help_text|safe }}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <p style="color: red">{{ error }}</p>
+                        {% endfor %}
+                    </p>
+                {% endfor %}
+                <button class="btn btn-secondary" type="submit">Sign up</button>
+            </form>
+        </div>
+        <div class="col-md-6" style="text-align: center">
+            <p><strong>-- OR --</strong></p>
+
+            <a href="{% url 'social:begin' 'google-oauth2' %}"><img style="height:4em" id="signInButton"
+                                                                                                    src="http://www.setyourowntests.com/_/rsrc/1468869481521/help/accounts/btn_google_signin_dark_normal_web%402x.png"></a>
+
+        </div>
+    </div>
+{% endblock %}

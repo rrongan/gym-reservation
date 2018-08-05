@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+     <script src="{% static 'reservation/js/facility.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Facility</h1>
+    <p>
+        <button type="button" class="btn btn-primary js-create-facility" data-url="{% url 'facility_create' %}">
+            <span class="fas fa-plus"></span>
+            New Facility
+        </button>
+    </p>
+    <table class="table" id="facility-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            {% include 'facility/includes/partial_facility_list.html' %}
+        </tbody>
+    </table>
+    <div class="modal fade" id="modal-facility">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+    </div>
+{% endblock %}

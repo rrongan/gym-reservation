@@ -1,0 +1,13 @@
+{% for r in reservation %}
+    <tr>
+        <td>{{ r.date }}</td>
+        <td>{{ r.get_start_time }} - {{ r.get_end_time }}</td>
+        <td>{{ r.fid }}</td>
+        <td>{{ r.duration }}</td>
+        <td>{{ r.status }}</td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="5" class="text-center bg-warning">No Reservation</td>
+    </tr>
+{% endfor %}

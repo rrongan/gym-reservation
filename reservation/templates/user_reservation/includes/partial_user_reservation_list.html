@@ -1,0 +1,33 @@
+{% regroup reservation|dictsortreversed:'date' by date as res_list %}
+{% for res in res_list %}
+    <tr>
+        <th>{{ res.grouper }}</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for r in res.list %}
+        <tr>
+            <td style="padding-left: 2em;">{{ r.get_start_time }} - {{ r.get_end_time }}</td>
+            <td>{{ r.fid }}</td>
+            <td>{{ r.duration }}</td>
+            <td>{{ r.status }}</td>
+            <td>
+                <button type="button"
+                        class="btn btn-warning btn-sm js-update-user-reservation"
+                        data-url="{% url 'user_reservation_update' user.id r.id %}">
+                    <span class="fas fa-edit"></span> Edit
+                </button>
+                <button type="button"
+                        class="btn btn-danger btn-sm js-delete-user-reservation"
+                        data-url="{% url 'user_reservation_delete' user.id r.id %}">
+                    <span class="fas fa-trash"></span> Delete
+                </button>
+            </td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="5" class="text-center bg-warning">No Reservation</td>
+        </tr>
+    {% endfor %}
+{% endfor %}

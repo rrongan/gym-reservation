@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+  <script src="{% static 'reservation/js/reservation.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Reservation</h1>
+    <p>
+        <button type="button" class="btn btn-primary js-create-reservation" data-url="{% url 'reservation_create' %}">
+            <span class="fas fa-plus"></span>
+            New Reservation
+        </button>
+    </p>
+    <table class="table" id="reservation-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>User</th>
+            <th>Facility</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Duration (Hours)</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            {% include 'reservation/includes/partial_reservation_list.html' %}
+        </tbody>
+    </table>
+    <div class="modal fade" id="modal-reservation">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+    </div>
+{% endblock %}

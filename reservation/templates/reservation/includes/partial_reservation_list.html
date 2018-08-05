@@ -1,0 +1,27 @@
+{% for res in reservation %}
+    <tr>
+        <td>{{ res.id }}</td>
+        <td>{{ res.uid }}</td>
+        <td>{{ res.fid }}</td>
+        <td>{{ res.date }}</td>
+        <td>{{ res.time }}</td>
+        <td>{{ res.duration }}</td>
+        <td>{{ res.status }}</td>
+        <td>
+            <button type="button"
+                    class="btn btn-warning btn-sm js-update-reservation"
+                    data-url="{% url 'reservation_update' res.id %}">
+                <span class="fas fa-edit"></span> Edit
+            </button>
+            <button type="button"
+                    class="btn btn-danger btn-sm js-delete-reservation"
+                    data-url="{% url 'reservation_delete' res.id %}">
+                <span class="fas fa-trash"></span> Delete
+            </button>
+        </td>
+    </tr>
+{% empty %}
+    <tr>
+        <td colspan="8" class="text-center bg-warning">No Reservation</td>
+    </tr>
+{% endfor %}

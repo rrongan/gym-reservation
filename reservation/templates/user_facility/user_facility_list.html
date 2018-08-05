@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+    <script src="{% static 'reservation/js/user_history.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <h1 class="page-header">Facility</h1>
+    <form class="form" action="{% url 'user_facility_list' %}" method="get">
+        <div class="form-row">
+            <div class="col-2">
+                <select class="form-control" name="facility_select">
+                    {% for f in facility %}
+                        <option value="{{ f.id }}">{{ f }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-1">
+                <button type="submit" class="btn btn-primary"><span class="fas fa-search"></span>Check Reservation</button>
+            </div>
+        </div>
+    </form>
+    <br>
+    <table class="table" id="user-history-table">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Duration (Hours)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% include 'user_facility/includes/partial_user_facility_list.html' %}
+        </tbody>
+    </table>
+{% endblock %}
